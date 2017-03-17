@@ -1,7 +1,5 @@
-doctype html
+extends layout
 
-script!= "var name = " + JSON.stringify(name)
-
-#app
-    h1 'Hello' name
-
+block content
+  h1 Koa v2 Skeleton
+  p Try going to #[strong localhost:3000/user/:name] (replace :name with your name)
