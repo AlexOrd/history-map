@@ -14,8 +14,8 @@ app.use(rootRoutes.allowedMethods());
 app.use(userRoutes.routes());
 app.use(userRoutes.allowedMethods());
 
-app.listen(3000, () => {
-  logger.info('Server running at http://localhost:3000')
+app.listen(process.env.PORT || 3000, () => {
+  logger.info('Server running...')
 });
 
 export default app
