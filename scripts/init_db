@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -e
+set -o pipefail
+set -x
+
+DB_NAME=${DB_NAME:-historymap}
+DB_USER=${DB_USER:-historymap}
+DB_PASS=${DB_PASS:-historymap}
+
+function user_exists () {
+  psql -c "SELECT usename FROM pg_catalog.pg_user WHERE usename = '$DB_USER'" |
+  grep "(1 row)"
+}
+
+function set_user_password () {
+  psql -c "ALTER USER \"$DB_USER\" WITH PASSWORD '$DB_PASS'"
+}
+
+user_exists $DB_USER || createuser -d $DB_USER && set_user_password
+
+psql -c "DROP DATABASE IF EXISTS $DB_NAME"
+createdb $DB_NAME
