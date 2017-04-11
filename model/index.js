@@ -5,6 +5,7 @@ const logger = require('../lib/logger');
 
 const requireDir = require('../lib/require-dir');
 const database  = require('../config.json');
+console.log('database')
 
 function connectToDB(config) {
     return new Sequelize(config.database, config.username, config.password, {
